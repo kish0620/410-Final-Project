@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
     <title>Team NARK</title>
 </head>
+
 <body>
     <div class="jumbotron">
-        <h1>Team NARK CS 410 Project</h1>
-        <p>Performing sentiment analysis on Reddit posts</p>
+        <div class="container">
+            <h1>Team NARK CS 410 Project</h1>
+            <p>Performing sentiment analysis on Reddit posts</p>
+        </div>
     </div>
-    <ul class="list-group">
-        <li>{{ v0 }}</li>
-        <li>{{ v1 }}</li>
-        <li>{{ v2 }}</li>
-        <li>{{ v3 }}</li>
-        <li>{{ v4 }}</li>
-        <li>{{ v5 }}</li>
-        <li>{{ v6 }}</li>
-        <li>{{ v7 }}</li>
-        <li>{{ v8 }}</li>
-        <li>{{ v9 }}</li>
-    </ul>
+    <div class="container">
+        <p>r/</p><input type="text">
+        <button type="button" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="container">
+        <h2>{{ v0 }}</h2>
+        <ul class="list-group">
+            <li>{{ v1 }}</li>
+            <li>{{ v2 }}</li>
+            <li>{{ v3 }}</li>
+            <li>{{ v4 }}</li>
+            <li>{{ v5 }}</li>
+            <li>{{ v6 }}</li>
+            <li>{{ v7 }}</li>
+            <li>{{ v8 }}</li>
+            <li>{{ v9 }}</li>
+            <li>{{ v10 }}</li>
+        </ul>
+    </div>
 </body>
+
 </html>
