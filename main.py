@@ -21,7 +21,8 @@ def reddit_page():
     posts.append('10 hottest machine learning subreddit posts')
     for post in hot_posts:
         posts.append(post.title)
-    return jsonify(posts)
+    # return jsonify(posts)
+    return render_template('index.html', v0=posts[0], v1=posts[1], v2=posts[2], v3=posts[3], v4=posts[4], v5=posts[5], v6=posts[6], v7=posts[7], v8=posts[8], v9=posts[9])
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)
