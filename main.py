@@ -1,7 +1,5 @@
 from flask import Flask, render_template, jsonify
-import pytweet
 import tweepy
-from TwitterAPI import TwitterAPI
 
 from bs4 import BeautifulSoup
 import requests
