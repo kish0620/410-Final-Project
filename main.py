@@ -6,6 +6,8 @@ import requests
 import re
 import pandas as pd
 import praw
+from textblob import TextBlob
+import datetime
 
 app = Flask(__name__)
 
@@ -15,12 +17,17 @@ def main_page():
 
 @app.route('/hot-posts/')
 def reddit_page():
+    print(TextBlob("This is really stupid").sentiment)
     reddit = praw.Reddit(client_id='AEKarPyPLIRaMiW5K9mjaQ', client_secret='YodD2MDeah332hCK1GhIpCSd4Zq2oA', user_agent='410 Project')
-    hot_posts = reddit.subreddit('MachineLearning').hot(limit=10)
+    hot_posts = reddit.subreddit('politics').controversial(limit=None)
     posts = []
     posts.append('10 hottest machine learning subreddit posts')
     for post in hot_posts:
+        # print(datetime.datetime.fromtimestamp(post.created_utc))
+        # print(post.title)
         posts.append(post.title)
+        score = TextBlob(post.title)
+        print(score.sentiment)
     # return jsonify(posts)
     return render_template('index.html', v0=posts[0], v1=posts[1], v2=posts[2], v3=posts[3], v4=posts[4], v5=posts[5], v6=posts[6], v7=posts[7], v8=posts[8], v9=posts[9], v10=posts[10])
     # # Downloading imdb top 250 movie's data
