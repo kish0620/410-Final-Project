@@ -29,7 +29,7 @@ def reddit_page():
         score = TextBlob(post.title)
         print(score.sentiment)
     # return jsonify(posts)
-    return render_template('index.html', v0=posts[0], v1=posts[1], v2=posts[2], v3=posts[3], v4=posts[4], v5=posts[5], v6=posts[6], v7=posts[7], v8=posts[8], v9=posts[9], v10=posts[10])
+    return render_template('index.html', posts=posts)
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)

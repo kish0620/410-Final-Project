@@ -46,18 +46,11 @@
     </div>
     <div class="container">
         <h2>{{ v0 }}</h2>
-        <ul class="list-group">
-            <li>{{ v1 }}</li>
-            <li>{{ v2 }}</li>
-            <li>{{ v3 }}</li>
-            <li>{{ v4 }}</li>
-            <li>{{ v5 }}</li>
-            <li>{{ v6 }}</li>
-            <li>{{ v7 }}</li>
-            <li>{{ v8 }}</li>
-            <li>{{ v9 }}</li>
-            <li>{{ v10 }}</li>
-        </ul>
+        <ol class="list-group">
+            {% for p in posts %}
+                <li>{{ p }}</li>
+            {% endfor %}
+        </ol>
     </div>
     <h2>Sentiment Analysis Scores</h2>
 
