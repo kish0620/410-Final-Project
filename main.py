@@ -21,15 +21,23 @@ def reddit_page():
     reddit = praw.Reddit(client_id='AEKarPyPLIRaMiW5K9mjaQ', client_secret='YodD2MDeah332hCK1GhIpCSd4Zq2oA', user_agent='410 Project')
     hot_posts = reddit.subreddit('politics').controversial(limit=None)
     posts = []
-    posts.append('10 hottest machine learning subreddit posts')
+    nums = []
+    scores = []
+    # posts.append('10 hottest machine learning subreddit posts')
+    count = 1
     for post in hot_posts:
         # print(datetime.datetime.fromtimestamp(post.created_utc))
         # print(post.title)
-        posts.append(post.title)
+        # posts.append(post.title)
         score = TextBlob(post.title)
-        print(score.sentiment)
+        posts.append(post.title)
+        scores.append(score.sentiment)
+        nums.append(count)
+        count += 1
+        # print(score.sentiment)
+
     # return jsonify(posts)
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', posts=posts, nums=nums, scores=scores)
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)

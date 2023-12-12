@@ -45,7 +45,7 @@
         <button type="button" class="btn btn-primary">Submit</button>
     </div>
     <div class="container">
-        <h2>{{ v0 }}</h2>
+        <h2>Hottest machine learning subreddit posts</h2>
         <ol class="list-group">
             {% for p in posts %}
                 <li>{{ p }}</li>
@@ -58,11 +58,11 @@
     <script>
         // Data for the chart
         var data = {
-            labels: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10'],
+            labels: [{{ nums | tojson}}],
             datasets: [{
                 label: 'Scores',
                 backgroundColor: '#36b6ff',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                data: [{{ scores | tojson }}],
             }]
         };
 
