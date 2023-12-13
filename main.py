@@ -17,27 +17,49 @@ def main_page():
 
 @app.route('/hot-posts/')
 def reddit_page():
-    print(TextBlob("This is really stupid").sentiment)
+    # print(TextBlob("This is really stupid").sentiment)
     reddit = praw.Reddit(client_id='AEKarPyPLIRaMiW5K9mjaQ', client_secret='YodD2MDeah332hCK1GhIpCSd4Zq2oA', user_agent='410 Project')
     hot_posts = reddit.subreddit('politics').controversial(limit=None)
-    posts = []
-    nums = []
-    scores = []
-    # posts.append('10 hottest machine learning subreddit posts')
-    count = 1
+    data = {}
+    data['[-1, -0.6)'] = 0
+    data['[-0.6, -0.4)'] = 0
+    data['[-0.4, -0.2)'] = 0
+    data['[-0.2, 0)'] = 0
+    data['(0, 0.2)'] = 0
+    data['[0.2, 0.4)'] = 0
+    data['[0.4, 0.6)'] = 0
+    data['[0.6, 1)'] = 0
     for post in hot_posts:
         # print(datetime.datetime.fromtimestamp(post.created_utc))
         # print(post.title)
         # posts.append(post.title)
-        score = TextBlob(post.title)
-        posts.append(post.title)
-        scores.append(score.sentiment)
-        nums.append(count)
-        count += 1
+        score = float(TextBlob(post.title).sentiment.polarity)
+        if score < -0.6:
+            data['[-1, -0.6)'] += 1
+        elif score >= -0.6 and score < -0.4:
+            data['[-0.6, -0.4)'] += 1
+        elif score >= -0.4 and score < -0.2:
+            data['[-0.4, -0.2)'] += 1
+        elif score >= -0.2 and score < 0:
+            data['[-0.2, 0)'] += 1
+        elif score > 0 and score < 0.2:
+            data['(0, 0.2)'] += 1
+        elif score >= 0.2 and score < 0.4:
+            data['[0.2, 0.4)'] += 1
+        elif score >= 0.4 and score < 0.6:
+            data['[0.4, 0.6)'] += 1
+        else:
+            data['[0.6, 1)'] += 1
+    print(data)
+        # posts.append(post.title)
+        # scores.append(score.sentiment)
+        # nums.append(count)
+        # count += 1
         # print(score.sentiment)
 
     # return jsonify(posts)
-    return render_template('index.html', posts=posts, nums=nums, scores=scores)
+    # TODO: create bar chart using data
+    return render_template('index.html', data = data)
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)
