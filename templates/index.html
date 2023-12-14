@@ -64,28 +64,6 @@
 
     <canvas id="barChart"></canvas>
     <script>
-        function myFunction() {
-            var enteredText = user_input_text.value;
-            // console.log("Entered text: " + enteredText);
-            alert("Entered text: " + enteredText);
-            fetch('/hot-posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ data: enteredText }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response from the server
-                console.log(data);
-                objective_subjective_dict = data;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-            // Need to add rest of backend submission code here.
-        }
         // Data for the chart
         var data = {
             labels: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10'],
@@ -119,65 +97,73 @@
         
     <div>
         <h2> Objective vs Subjective Posts </h2>
-    
-        <!-- creates a table with sentiment type and number of posts -->
-        <!-- <table class="table table-striped" >
-            <thead>
-              <tr>
-                <th scope="col">Sentiment Type</th>
-                <th scope="col">Number of Posts</th>
-              </tr>
-            </thead>
-            <tbody>
-        {% for key, value in objective_subjective_dict.items() %}
-          <tr>
-            <th scope="row">{{ key }}</th>
-            <td>{{ value }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-        </table> -->
 
-        <!-- code attempting bar chart for obj vs subj -->
         <canvas id="barChart1"></canvas>
 
-        <!-- this creates output of objective and subjective on bottom of screen
-        {% for e in objective_subjective_dict %}
-        {{e}} : {{objective_subjective_dict[e]}}
-    {% endfor %}
-        -->
 
         <script type="text/javascript">
-            var sub = '{{objective_subjective_dict.subjective}}';
-            var obj = '{{objective_subjective_dict.objective}}';
-            console.log('{{objective_subjective_dict}}')
-            var data1 = {
-                labels: ['objective', 'subjective'],
-                datasets: [{
-                    label: 'Scores',
-                    backgroundColor: '#36b6ff',
-                    data: [sub, obj],
-                }]
-            };
+            var objective_subjective_dict = {};
+            var myBarChart = null;
+            async function myFunction() {
+                var enteredText = user_input_text.value;
+                // console.log("Entered text: " + enteredText);
+                alert("Entered text: " + enteredText);
+                try {
+                    const response = await fetch('/hot-posts', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ data: enteredText }),
+                    });
 
-            // Chart configuration
-            var options = {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+                    const data = await response.json();
+
+                    // Update the 'vals' variable with the API call response
+                    updateVals(data);
+                } catch (error) {
+                    console.error('Error:', error);
                 }
-            };
-    
-            // Get the canvas element
-            var ctx = document.getElementById('barChart1').getContext('2d');
-    
-            // Create a vertical bar chart
-            var myBarChart = new Chart(ctx, {
-                type: 'bar',
-                data: data1,
-                options: options
-            });
+                // Need to add rest of backend submission code here.
+            }
+            function updateVals(result) {
+                // Update the 'vals' variable
+                console.log('success')
+                console.log(result)
+                objective_subjective_dict = result;
+                var sub = objective_subjective_dict.subjective;
+                var obj = objective_subjective_dict.objective;
+                console.log(objective_subjective_dict)
+                var data1 = {
+                    labels: ['objective', 'subjective'],
+                    datasets: [{
+                        label: 'Scores',
+                        backgroundColor: '#36b6ff',
+                        data: [sub, obj],
+                    }]
+                };
+
+                // Chart configuration
+                var options = {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                };
+        
+                // Get the canvas element
+                var ctx = document.getElementById('barChart1').getContext('2d');
+                if(myBarChart){
+                    myBarChart.destroy();
+                }
+                // Create a vertical bar chart
+                myBarChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data1,
+                    options: options
+                });
+            }
         </script>
         </div>   
 </body>

@@ -21,7 +21,7 @@ def reddit_page():
     reddit = praw.Reddit(client_id='AEKarPyPLIRaMiW5K9mjaQ', client_secret='YodD2MDeah332hCK1GhIpCSd4Zq2oA', user_agent='410 Project')
     subreddit = request.get_json()['data']
     print(subreddit)
-    hot_posts = reddit.subreddit(subreddit).controversial(limit=10)
+    hot_posts = reddit.subreddit(subreddit).controversial(limit=None)
     sentiment_dict = {}
     sentiment_dict['[-1, -0.6)'] = 0
     sentiment_dict['[-0.6, -0.4)'] = 0
