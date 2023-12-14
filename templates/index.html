@@ -59,6 +59,7 @@
             <li>{{ v10 }}</li>
         </ul>
     </div>
+    <div>
     <h2>Sentiment Analysis Scores</h2>
 
     <canvas id="barChart"></canvas>
@@ -92,6 +93,72 @@
             options: options
         });
     </script>
+    </div>
+        
+    <div>
+        <h2> Objective vs Subjective Posts </h2>
+    
+        <!-- creates a table with sentiment type and number of posts -->
+        <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th scope="col">Sentiment Type</th>
+                <th scope="col">Number of Posts</th>
+              </tr>
+            </thead>
+            <tbody>
+        {% for key, value in objective_subjective_dict.items() %}
+          <tr>
+            <th scope="row">{{ key }}</th>
+            <td>{{ value }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+
+        <!-- code attempting bar chart for obj vs subj -->
+        <canvas id="barChart1"></canvas>
+
+        <!-- this creates output of objective and subjective on bottom of screen
+        {% for e in objective_subjective_dict %}
+        {{e}} : {{objective_subjective_dict[e]}}
+    {% endfor %}
+        -->
+
+        <script type="text/javascript">
+            var sub = '{{objective_subjective_dict.subjective}}';
+            var obj = '{{objective_subjective_dict.objective}}';
+
+            var data2 = JSON.parse(objective_subjective_dict);
+            var data1 = {
+                labels: ['objective', 'subjective'],
+                datasets: [{
+                    label: 'Scores',
+                    backgroundColor: '#36b6ff',
+                    data: data2,
+                }]
+            };
+
+            // Chart configuration
+            var options = {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+    
+            // Get the canvas element
+            var ctx = document.getElementById('barChart1').getContext('2d');
+    
+            // Create a vertical bar chart
+            var myBarChart = new Chart(ctx, {
+                type: 'bar',
+                data: data1,
+                options: options
+            });
+        </script>
+        </div>   
 </body>
 
 </html>
