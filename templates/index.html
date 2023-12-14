@@ -46,44 +46,46 @@
     </div>
     <div class="container">
         <h2>Hottest machine learning subreddit posts</h2>
-        <ol class="list-group">
+        <!-- <ol class="list-group">
             {% for p in posts %}
                 <li>{{ p }}</li>
             {% endfor %}
-        </ol>
+        </ol> -->
     </div>
     <h2>Sentiment Analysis Scores</h2>
 
     <canvas id="barChart"></canvas>
     <script>
         // Data for the chart
-        var data = {
-            labels: [{{ nums | tojson}}],
-            datasets: [{
-                label: 'Scores',
-                backgroundColor: '#36b6ff',
-                data: [{{ scores | tojson }}],
-            }]
-        };
+        
+        // var data = {
+        //     labels: [{{ nums | tojson}}],
+        //     datasets: [{
+        //         label: 'Scores',
+        //         backgroundColor: '#36b6ff',
+        //         data: [{{ scores | tojson }}],
+        //     }]
+        // };
 
-        // Chart configuration
-        var options = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
+        // // Chart configuration
+        // var options = {
+        //     scales: {
+        //         y: {
+        //             beginAtZero: true
+        //         }
+        //     }
+        // };
 
-        // Get the canvas element
-        var ctx = document.getElementById('barChart').getContext('2d');
+        // // Get the canvas element
+        // var ctx = document.getElementById('barChart').getContext('2d');
 
-        // Create a vertical bar chart
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
+        // // Create a vertical bar chart
+        // var myBarChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: data,
+        //     options: options
+        // });
+        
     </script>
 </body>
 
