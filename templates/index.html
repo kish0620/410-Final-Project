@@ -44,7 +44,7 @@
         <h4 style="display: inline">r/ </h4><input type="text">
         <button type="button" class="btn btn-primary">Submit</button>
     </div>
-    <div class="container">
+    <!-- <div class="container">
         <h2>{{ v0 }}</h2>
         <ul class="list-group">
             <li>{{ v1 }}</li>
@@ -58,7 +58,7 @@
             <li>{{ v9 }}</li>
             <li>{{ v10 }}</li>
         </ul>
-    </div>
+    </div> -->
     <div>
     <h2>Sentiment Analysis Scores</h2>
 
@@ -99,7 +99,7 @@
         <h2> Objective vs Subjective Posts </h2>
     
         <!-- creates a table with sentiment type and number of posts -->
-        <table class="table table-striped" >
+        <!-- <table class="table table-striped" >
             <thead>
               <tr>
                 <th scope="col">Sentiment Type</th>
@@ -114,7 +114,7 @@
           </tr>
           {% endfor %}
         </tbody>
-        </table>
+        </table> -->
 
         <!-- code attempting bar chart for obj vs subj -->
         <canvas id="barChart1"></canvas>
@@ -128,14 +128,12 @@
         <script type="text/javascript">
             var sub = '{{objective_subjective_dict.subjective}}';
             var obj = '{{objective_subjective_dict.objective}}';
-
-            var data2 = JSON.parse(objective_subjective_dict);
             var data1 = {
                 labels: ['objective', 'subjective'],
                 datasets: [{
                     label: 'Scores',
                     backgroundColor: '#36b6ff',
-                    data: data2,
+                    data: [sub, obj],
                 }]
             };
 
