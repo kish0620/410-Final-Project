@@ -69,7 +69,7 @@ def reddit_page():
 
     # return jsonify(posts)
     # TODO: create bar charts using the two dicts
-    return render_template('index.html')
+    return render_template('index.html', objective_subjective_dict=objective_subjective_dict)
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)
