@@ -41,8 +41,8 @@
         </div>
     </div>
     <div class="container">
-        <h4 style="display: inline">r/ </h4><input type="text">
-        <button type="button" class="btn btn-primary">Submit</button>
+        <h4 style="display: inline">r/ </h4><input type="text" id="user_input_text">
+        <button type="button" class="btn btn-primary" id="submit_button" onclick="myFunction()">Submit</button>
     </div>
     <!-- <div class="container">
         <h2>{{ v0 }}</h2>
@@ -64,6 +64,13 @@
 
     <canvas id="barChart"></canvas>
     <script>
+        // import axios from 'axios'
+        function myFunction() {
+            var enteredText = user_input_text.value;
+            // console.log("Entered text: " + enteredText);
+            alert("Entered text: " + enteredText);
+            // Need to add rest of backend submission code here.
+        }
         // Data for the chart
         var data = {
             labels: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10'],
