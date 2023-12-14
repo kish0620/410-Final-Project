@@ -64,11 +64,26 @@
 
     <canvas id="barChart"></canvas>
     <script>
-        // import axios from 'axios'
         function myFunction() {
             var enteredText = user_input_text.value;
             // console.log("Entered text: " + enteredText);
             alert("Entered text: " + enteredText);
+            fetch('/hot-posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ data: enteredText }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
+                objective_subjective_dict = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
             // Need to add rest of backend submission code here.
         }
         // Data for the chart
@@ -135,6 +150,7 @@
         <script type="text/javascript">
             var sub = '{{objective_subjective_dict.subjective}}';
             var obj = '{{objective_subjective_dict.objective}}';
+            console.log('{{objective_subjective_dict}}')
             var data1 = {
                 labels: ['objective', 'subjective'],
                 datasets: [{
