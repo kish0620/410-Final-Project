@@ -2,12 +2,12 @@ from flask import Flask, render_template, request, jsonify
 import tweepy
 
 from bs4 import BeautifulSoup
-import requests
-import re
 import pandas as pd
 import praw
 from textblob import TextBlob
-import datetime
+
+from collections import OrderedDict
+
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def reddit_page():
     subreddit = request.get_json()['data']
     print(subreddit)
     hot_posts = reddit.subreddit(subreddit).controversial(limit=None)
-    sentiment_dict = {}
+    sentiment_dict = OrderedDict()
     sentiment_dict['[-1, -0.6)'] = 0
     sentiment_dict['[-0.6, -0.4)'] = 0
     sentiment_dict['[-0.4, -0.2)'] = 0

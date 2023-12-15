@@ -75,6 +75,8 @@
 
         <script type="text/javascript">
 
+            const keys = ['[-1, -0.6)', '[-0.6, -0.4)', '[-0.4, -0.2)', '[-0.2, 0)', '(0, 0.2)', '[0.2, 0.4)', '[0.4, 0.6)', '[0.6, 1)'];
+
             var objective_subjective_dict = {};
             var myBarChart = null;
             var myBarChartScores = null;
@@ -97,7 +99,7 @@
                     updateVals(data);
                     clearError();
                 } catch (error) {
-                    console.log(error)
+                    console.log(error);
                     displayError('That subreddit does not exist.');
                 }
                 // Need to add rest of backend submission code here.
@@ -112,9 +114,8 @@
             }
             function updateVals(result) {
                 // Update the 'vals' variable
-                console.log('success')
-                console.log(result)
-                sentiment_dict = result['sentiment_dict']
+                sentiment_dict = result['sentiment_dict'];
+                var scores = keys.map(k => sentiment_dict[k]);
                 objective_subjective_dict = result['obj_subj_dict'];
                 var sub = objective_subjective_dict.subjective;
                 var obj = objective_subjective_dict.objective;
@@ -128,11 +129,11 @@
                 };
 
                 data = {
-                    labels: Object.keys(sentiment_dict),
+                    labels: keys,
                     datasets: [{
                         label: 'Number of subreddit posts',
                         backgroundColor: '#36b6ff',
-                        data: Object.values(sentiment_dict)
+                        data: scores
                     }]
                 }
 
