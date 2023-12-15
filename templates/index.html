@@ -38,6 +38,8 @@
         <div class="container">
             <h1>Team NARK CS 410 Project</h1>
             <p>Performing sentiment analysis on Reddit posts</p>
+            <p>Please enter a subreddit in the search field. You will see the range of sentiment values from the most controversial posts in the subreddit (-1 being negative and 1 being positive)</p>
+            <p>The number of objective posts vs subjective posts will also be shown in a second bar chart</p>
         </div>
     </div>
     <div class="container">
@@ -45,21 +47,6 @@
         <div id="error" style="color: red;"></div>
         <button type="button" class="btn btn-primary" id="submit_button" onclick="myFunction()">Submit</button>
     </div>
-    <!-- <div class="container">
-        <h2>{{ v0 }}</h2>
-        <ul class="list-group">
-            <li>{{ v1 }}</li>
-            <li>{{ v2 }}</li>
-            <li>{{ v3 }}</li>
-            <li>{{ v4 }}</li>
-            <li>{{ v5 }}</li>
-            <li>{{ v6 }}</li>
-            <li>{{ v7 }}</li>
-            <li>{{ v8 }}</li>
-            <li>{{ v9 }}</li>
-            <li>{{ v10 }}</li>
-        </ul>
-    </div> -->
     <div>
         <h2>Sentiment Analysis Scores</h2>
 
@@ -82,8 +69,6 @@
             var myBarChartScores = null;
             async function myFunction() {
                 var enteredText = user_input_text.value;
-                // console.log("Entered text: " + enteredText);
-                alert("Entered text: " + enteredText);
                 try {
                     const response = await fetch('/hot-posts', {
                         method: 'POST',
@@ -99,7 +84,6 @@
                     updateVals(data);
                     clearError();
                 } catch (error) {
-                    console.log(error);
                     displayError('That subreddit does not exist.');
                 }
                 // Need to add rest of backend submission code here.
