@@ -61,41 +61,12 @@
         </ul>
     </div> -->
     <div>
-    <h2>Sentiment Analysis Scores</h2>
+        <h2>Sentiment Analysis Scores</h2>
 
-    <canvas id="barChart"></canvas>
-    <script>
-        // Data for the chart
-        var data = {
-            labels: ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8', 'v9', 'v10'],
-            datasets: [{
-                label: 'Scores',
-                backgroundColor: '#36b6ff',
-                data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-            }]
-        };
+        <canvas id="barChart"></canvas>
 
-        // Chart configuration
-        var options = {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        // Get the canvas element
-        var ctx = document.getElementById('barChart').getContext('2d');
-
-        // Create a vertical bar chart
-        var myBarChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-    </script>
     </div>
-        
+
     <div>
         <h2> Objective vs Subjective Posts </h2>
 
@@ -103,8 +74,10 @@
 
 
         <script type="text/javascript">
+
             var objective_subjective_dict = {};
             var myBarChart = null;
+            var myBarChartScores = null;
             async function myFunction() {
                 var enteredText = user_input_text.value;
                 // console.log("Entered text: " + enteredText);
@@ -124,6 +97,7 @@
                     updateVals(data);
                     clearError();
                 } catch (error) {
+                    console.log(error)
                     displayError('That subreddit does not exist.');
                 }
                 // Need to add rest of backend submission code here.
@@ -140,18 +114,27 @@
                 // Update the 'vals' variable
                 console.log('success')
                 console.log(result)
-                objective_subjective_dict = result;
+                sentiment_dict = result['sentiment_dict']
+                objective_subjective_dict = result['obj_subj_dict'];
                 var sub = objective_subjective_dict.subjective;
                 var obj = objective_subjective_dict.objective;
-                console.log(objective_subjective_dict)
                 var data1 = {
                     labels: ['objective', 'subjective'],
                     datasets: [{
-                        label: 'Scores',
+                        label: 'Number of subreddit posts',
                         backgroundColor: '#36b6ff',
                         data: [sub, obj],
                     }]
                 };
+
+                data = {
+                    labels: Object.keys(sentiment_dict),
+                    datasets: [{
+                        label: 'Number of subreddit posts',
+                        backgroundColor: '#36b6ff',
+                        data: Object.values(sentiment_dict)
+                    }]
+                }
 
                 // Chart configuration
                 var options = {
@@ -161,10 +144,10 @@
                         }
                     }
                 };
-        
+
                 // Get the canvas element
                 var ctx = document.getElementById('barChart1').getContext('2d');
-                if(myBarChart){
+                if (myBarChart) {
                     myBarChart.destroy();
                 }
                 // Create a vertical bar chart
@@ -173,9 +156,19 @@
                     data: data1,
                     options: options
                 });
+
+                var ctxScores = document.getElementById('barChart').getContext('2d');
+                if (myBarChartScores) {
+                    myBarChartScores.destroy();
+                }
+                myBarChartScores = new Chart(ctxScores, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
             }
         </script>
-        </div>   
+    </div>
 </body>
 
 </html>

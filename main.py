@@ -62,7 +62,7 @@ def reddit_page():
             objective_subjective_dict['subjective'] += 1
     
     print(sentiment_dict)
-    print(objective_subjective_dict)
+    # print(objective_subjective_dict)
         # posts.append(post.title)
         # scores.append(score.sentiment)
         # nums.append(count)
@@ -72,7 +72,10 @@ def reddit_page():
     # return jsonify(posts)
     # TODO: create bar charts using the two dicts
     # return render_template('index.html', dict_keys=list(objective_subjective_dict.keys()), vals = list(objective_subjective_dict.values()))
-    return objective_subjective_dict
+    return jsonify({
+        'sentiment_dict': sentiment_dict, 
+        'obj_subj_dict': objective_subjective_dict
+    })
     # # Downloading imdb top 250 movie's data
     # url = 'http://www.imdb.com/chart/top'
     # response = requests.get(url)
