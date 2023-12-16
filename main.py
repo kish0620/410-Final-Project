@@ -30,6 +30,7 @@ def reddit_page():
     objective_subjective_dict['objective'] = 0
     objective_subjective_dict['subjective'] = 0
     for post in hot_posts:
+        #get sentiment value and put in correct bin
         score = float(TextBlob(post.title).sentiment.polarity)
         if score < -0.6:
             sentiment_dict['[-1, -0.6)'] += 1
@@ -47,7 +48,7 @@ def reddit_page():
             sentiment_dict['[0.4, 0.6)'] += 1
         elif score >= 0.6:
             sentiment_dict['[0.6, 1)'] += 1
-        
+        #sentiment score of 0 is objective
         if score == 0.0:
             objective_subjective_dict['objective'] += 1
         else:

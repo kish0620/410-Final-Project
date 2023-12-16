@@ -80,13 +80,11 @@
 
                     const data = await response.json();
 
-                    // Update the 'vals' variable with the API call response
                     updateVals(data);
                     clearError();
                 } catch (error) {
                     displayError('That subreddit does not exist.');
                 }
-                // Need to add rest of backend submission code here.
             }
             function displayError(errorMessage) {
                 // Display the error message in the 'error' div
